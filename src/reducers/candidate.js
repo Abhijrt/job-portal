@@ -14,8 +14,6 @@ const initalCandidatesList = {
 };
 
 export function candidate(state = initalCandidatesList, action) {
-  console.log(action);
-  console.log("ON", state);
   switch (action.type) {
     case ADD_CANDIDATES:
       return {

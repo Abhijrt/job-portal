@@ -18,7 +18,6 @@ function Candidate(props) {
       name: filteredArray[0].name,
       id: filteredArray[0].id,
     };
-    console.log(candidateObj);
     setCandidate(candidateObj);
   }, []);
 

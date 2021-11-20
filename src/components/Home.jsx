@@ -24,7 +24,6 @@ function Home(props) {
       });
   };
 
-  console.log(candidatesList);
   return (
     <div className="card-component">
       {candidatesList.map((candidate) => (
