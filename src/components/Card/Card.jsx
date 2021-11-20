@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { addToRejectList, addToShortList } from "../../actions";
+import { Navigate } from "react-router-dom";
 import "./card.css";
 
 function Card(props) {
@@ -10,10 +11,12 @@ function Card(props) {
 
   const handleSelection = () => {
     dispatch(addToShortList(props.candidate));
+    return <Navigate to="/" />;
   };
 
   const handleRejection = () => {
     dispatch(addToRejectList(props.candidate));
+    return <Navigate to="/" />;
   };
 
   return (
