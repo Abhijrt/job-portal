@@ -1,15 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
+import { connect } from "react-redux";
+import Card from "../Card/Card";
 
-function Shortlisted() {
-  const [slectedList, setSelectedList] = useState([]);
+function Shortlisted(props) {
+  const selectedLists = props.selectedLists;
 
   return (
-    <div>
-      {slectedList.length === 0 ? (
+    <div className="card-component">
+      {selectedLists.length === 0 ? (
         <div> There are no Selected Candidate List Available !</div>
-      ) : null}
+      ) : (
+        <>
+          {selectedLists.map((candidate) => (
+            <Card candidate={candidate} />
+          ))}
+        </>
+      )}
     </div>
   );
 }
 
-export default Shortlisted;
+function mapStateToProps(state) {
+  return {
+    selectedLists: state.candidate.selectedLists,
+  };
+}
+
+export default connect(mapStateToProps)(Shortlisted);
