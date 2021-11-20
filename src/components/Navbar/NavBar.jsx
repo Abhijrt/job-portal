@@ -1,15 +1,35 @@
 import React, { useState } from "react";
+import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import {
+  addToRejectList,
+  addToShortList,
+  handleCandidateSearch,
+} from "../../actions";
 import "./navbar.css";
 
 function NavBar(props) {
   const [searchText, setSearchText] = useState("");
+  const { showSearchResults, results: candidate } = props;
 
-  const handleSearchChange = () => {};
+  const dispatch = useDispatch();
 
-  const handleSearchClick = () => {};
+  const handleSearchChange = (e) => {
+    setSearchText(e.target.value);
+  };
 
-  const { showSearchResults = false } = props;
+  const handleSearchClick = () => {
+    dispatch(handleCandidateSearch(searchText));
+  };
+
+  const handleCandidateReject = () => {
+    dispatch(addToRejectList(candidate[0]));
+  };
+
+  const handleCandidateSelect = () => {
+    dispatch(addToShortList(candidate[0]));
+  };
+
   return (
     <nav>
       <label className="logo">
@@ -26,17 +46,27 @@ function NavBar(props) {
       {showSearchResults && (
         <div className="search-results">
           <div className="search-result">
-            {/* <img src={movie.Poster} alt="search-pic" />
-              <div className="movie-info">
-                <span>{movie.Title}</span>
-                <button onClick={() => this.handleAddToMovies(movie)}>
-                  Add to Movies
-                </button>
-              </div> */}
+            <img src={candidate[0].Image} alt="search-pic" />
+            <div className="movie-info">
+              <span>{candidate[0].name}</span>
+            </div>
+            <div>
+              <button
+                className="btn"
+                onClick={() => handleCandidateSelect(candidate)}
+              >
+                Select
+              </button>
+              <button
+                className="btn"
+                onClick={() => handleCandidateReject(candidate)}
+              >
+                Reject
+              </button>
+            </div>
           </div>
         </div>
       )}
-      {/* </div> */}
       <ul>
         <li>
           <Link className="link" to="/shortlisted">
@@ -53,4 +83,11 @@ function NavBar(props) {
   );
 }
 
-export default NavBar;
+function mapStateToProps(state) {
+  return {
+    results: state.candidate.results,
+    showSearchResults: state.candidate.showSearchResults,
+  };
+}
+
+export default connect(mapStateToProps)(NavBar);

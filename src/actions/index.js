@@ -27,22 +27,9 @@ export function addToShortList(candidate) {
   };
 }
 
-export function handleMovieSearch(searchText) {
-  return function (dispatch) {
-    const url = `http://www.omdbapi.com/?apikey=3ca5df7&t=${searchText}`;
-    fetch(url)
-      .then((response) => response.json())
-      .then((movie) => {
-        console.log("movie", movie);
-        // dispatch action to save search results in store
-        dispatch(addMovieSearchResult(movie));
-      });
-  };
-}
-
-export function addMovieSearchResult(movie) {
+export function handleCandidateSearch(searchText) {
   return {
     type: ADD_SEARCH_RESULT,
-    movie,
+    searchText,
   };
 }
