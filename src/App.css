@@ -43,3 +43,9 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+.single-candidate {
+  width: 20%;
+  margin: auto;
+  margin-top: 20px;
+}

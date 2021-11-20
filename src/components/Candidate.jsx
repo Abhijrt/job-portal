@@ -1,8 +1,38 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { useParams } from "react-router-dom";
 import Card from "./Card/Card";
 
 function Candidate(props) {
-  return <Card candidate={props.candidate} />;
+  const [candidate, setCandidate] = useState({});
+  const params = useParams();
+  const { candidatesLists } = props;
+
+  useEffect(() => {
+    const filteredArray = candidatesLists.filter(
+      (item) => item.id == params.id
+    );
+
+    const candidateObj = {
+      Image: filteredArray[0].Image,
+      name: filteredArray[0].name,
+      id: filteredArray[0].id,
+    };
+    console.log(candidateObj);
+    setCandidate(candidateObj);
+  }, []);
+
+  return (
+    <div className="single-candidate">
+      <Card candidate={candidate} singleCandidate={true} />
+    </div>
+  );
 }
 
-export default Candidate;
+function mapStateToProps(state) {
+  return {
+    candidatesLists: state.candidate.candidatesLists,
+  };
+}
+
+export default connect(mapStateToProps)(Candidate);
