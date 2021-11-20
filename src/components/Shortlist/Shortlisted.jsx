@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 
 function Shortlisted() {
-  return <div style={{ color: "red" }}>Shortlisted</div>;
+  const [slectedList, setSelectedList] = useState([]);
+
+  return (
+    <div>
+      {slectedList.length === 0 ? (
+        <div> There are no Selected Candidate List Available !</div>
+      ) : null}
+    </div>
+  );
 }
 
 export default Shortlisted;

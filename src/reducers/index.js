@@ -1,3 +1,7 @@
 import { combineReducers } from "redux";
 
-export default combineReducers({});
+import { candidate } from "./candidate";
+
+export default combineReducers({
+  candidate,
+});
