@@ -12,7 +12,9 @@ function Shortlisted(props) {
       ) : (
         <>
           {selectedLists.map((candidate) => (
-            <Card candidate={candidate} />
+            <div style={{ margin: "20px" }}>
+              <Card candidate={candidate} />
+            </div>
           ))}
         </>
       )}
