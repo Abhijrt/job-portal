@@ -20,15 +20,12 @@ export function candidate(state = initalCandidatesList, action) {
     case ADD_TO_REJECTLIST:
       return {
         ...state,
-        // rejectLists: [action., ...state.favourites],
+        rejectLists: [action.candidate, ...state.rejectLists],
       };
     case ADD_TO_SHORTLIST:
-      const filteredArray = state.favourites.filter(
-        (movie) => movie.Title !== action.movie.Title
-      );
       return {
         ...state,
-        favourites: filteredArray,
+        selectedLists: [action.candidate, ...state.selectedLists],
       };
     default:
       return state;

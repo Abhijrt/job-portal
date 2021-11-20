@@ -13,17 +13,17 @@ export function addCandidates(candidates) {
   };
 }
 
-export function addToRejectList(val) {
+export function addToRejectList(candidate) {
   return {
     type: ADD_TO_REJECTLIST,
-    val,
+    candidate,
   };
 }
 
-export function addToShortList(val) {
+export function addToShortList(candidate) {
   return {
     type: ADD_TO_SHORTLIST,
-    val,
+    candidate,
   };
 }
 
